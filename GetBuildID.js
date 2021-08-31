@@ -3,14 +3,14 @@ var username = process.env.BROWSERSTACK_USERNAME
 var accessKey = process.env.BROWSERSTACK_ACCESS_KEY
 var basicAuthVal = "Basic "+ new Buffer.from(username+":"+accessKey).toString("base64");
 
-module.exports = function(build_name, callback){
+module.exports = function(build_name, basicAuthCreds, callback){
 	var build_id = '';
 	var check_if_exists = 0;
 	request(
 		{
 			url: 'https://api.browserstack.com/automate/builds.json',
 			headers: {
-				"Authorization" : basicAuthVal
+				"Authorization" : basicAuthCreds
 			},
 			json: true
 		},

@@ -4,25 +4,20 @@ var http = require('http');
 var fs = require('fs');
 
 
-var username = process.env.BROWSERSTACK_USERNAME
-var accessKey = process.env.BROWSERSTACK_ACCESS_KEY
-var basicAuthVal = "Basic "+ new Buffer.from(username+":"+accessKey).toString("base64");
-
-module.exports.getSession = function(build_name, callback){
+module.exports.getSession = function(build_name, basicAuthCreds, callback){
 	var session_details = '';
 	var html_details = '';
 	
-	getBuildID(build_name, function(build_id){
+	getBuildID(build_name, basicAuthCreds, function(build_id){
 		console.log('Build Name: '+build_name);
 		console.log('Build ID: '+build_id); 
 
-		//console.log('==============SESSIONS=================');
 		console.log('Please find the generated report in ./reports/report-'+build_name+'.html');
 		request(
 			{
 				url: 'https://api.browserstack.com/automate/builds/'+build_id+'/sessions.json?limit=100',
 				headers: {
-					"Authorization": basicAuthVal
+					"Authorization": basicAuthCreds
 				},
 				json: true
 			},
@@ -48,9 +43,9 @@ module.exports.getSession = function(build_name, callback){
 					       + '<h2><center><u>BrowserStack Report</u></center></h2>'
 					       + '<h3><center>Build Name: '+build_name+'</center></h3>'
 					       + '<h3><center>Build ID: '+build_id+'</center></h3>'
-					       + '<p><center>This report can only fetch a maximum of 100 sessions per build.</center></p>'
+					       + '<p><center><strong>NOTE: </strong>This report can only fetch a maximum of 100 sessions per build.</center></p>'
 					       + '<table style="width:100%"><thead><th style="height:50px">Name</th><th>Duration</th><th>OS</th><th>OS Version</th>'
-					       + '<th>Browser</th><th>Browser Version</th><th>Status</th><th>Reason</th><th>Session ID</th><th>Public Session URL</th></thead>'
+					       + '<th>Browser</th><th>Browser Version</th><th>Status</th><th>Video URL</th><th>Session ID</th><th>Public Session URL</th></thead>'
 					       + '<tbody>';
 				for(const index in body){
 					html_details+='<tr>'
@@ -61,11 +56,10 @@ module.exports.getSession = function(build_name, callback){
 					       + '<td>'+body[index].automation_session.browser+'</td>'
 					       + '<td>'+body[index].automation_session.browser_version+'</td>'
 					       + '<td>'+body[index].automation_session.status+'</td>'
-					       + '<td>'+body[index].automation_session.reason+'</td>'
+					       + '<td><a href="'+body[index].automation_session.video_url+'">Video URL</a></td>'
 					       + '<td>'+body[index].automation_session.hashed_id+'</td>'
 					       + '<td><a href="'+body[index].automation_session.public_url+'">Public Session URL</a></td>'
 					       + '</tr>';
-					
 				}
 				html_details+= '</tbody></table>'
 					       + '</body>'

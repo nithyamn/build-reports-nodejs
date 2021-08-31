@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json
-reports/
+*.html
+.DS_Store
