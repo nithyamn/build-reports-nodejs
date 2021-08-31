@@ -8,7 +8,7 @@ module.exports = function(build_name, basicAuthCreds, callback){
 	var check_if_exists = 0;
 	request(
 		{
-			url: 'https://api.browserstack.com/automate/builds.json',
+			url: 'https://api.browserstack.com/automate/builds.json?limit=100',
 			headers: {
 				"Authorization" : basicAuthCreds
 			},

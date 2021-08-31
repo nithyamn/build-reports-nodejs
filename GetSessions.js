@@ -43,7 +43,7 @@ module.exports.getSession = function(build_name, basicAuthCreds, callback){
 					       + '<h2><center><u>BrowserStack Report</u></center></h2>'
 					       + '<h3><center>Build Name: '+build_name+'</center></h3>'
 					       + '<h3><center>Build ID: '+build_id+'</center></h3>'
-					       + '<p><center><strong>NOTE: </strong>This report can only fetch a maximum of 100 sessions per build.</center></p>'
+					       + '<p><center><strong>NOTE: </strong>This report can only fetch a maximum of 100 builds and 100 sessions within each build.</center></p>'
 					       + '<table style="width:100%"><thead><th style="height:50px">Name</th><th>Duration</th><th>OS</th><th>OS Version</th>'
 					       + '<th>Browser</th><th>Browser Version</th><th>Status</th><th>Video URL</th><th>Session ID</th><th>Public Session URL</th></thead>'
 					       + '<tbody>';
