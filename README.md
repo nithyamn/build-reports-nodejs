@@ -1,4 +1,4 @@
-# build-reports-nodejs (BrowserStack)
+# build-reports-nodejs (BrowserStack Automate)
 
 ##  Notes
 1. The BrowserStack credentials are being fetched as environment variables - `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY`.
