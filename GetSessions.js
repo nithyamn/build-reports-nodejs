@@ -38,7 +38,7 @@ module.exports.getSession = function(build_name, basicAuthCreds, callback){
 				html_details = '<!DOCTYPE html>'
 					       + '<html>'
 					       + '<head><title>Report - '+build_name+'</title></head>'
-					       + '<style>table, th, td {border:1px solid black;border-collapse: collapse;}</style>'
+					       + '<style>table, th, td {border:1px solid black !important;border-collapse: collapse !important;}</style>'
 					       + '<body>'
 					       + '<h2><center><u>BrowserStack Report</u></center></h2>'
 					       + '<h3><center>Build Name: '+build_name+'</center></h3>'
