@@ -1,13 +1,13 @@
 {
   "name": "node-method-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Creates a HTML reports of all sessions within a specified build.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nithya Mani (BrowserStack)",
   "license": "ISC",
   "dependencies": {
     "fs": "0.0.1-security",
