@@ -44,19 +44,29 @@ module.exports.getSession = function(build_name, basicAuthCreds, callback){
 					       + '<h3><center>Build Name: '+build_name+'</center></h3>'
 					       + '<h3><center>Build ID: '+build_id+'</center></h3>'
 					       + '<p><center><strong>NOTE: </strong>This report can only fetch a maximum of 100 builds and 100 sessions within each build.</center></p>'
-					       + '<table style="width:100%"><thead><th style="height:50px">Name</th><th>Duration (s)</th><th>OS</th><th>OS Version</th>'
-					       + '<th>Browser</th><th>Browser Version</th><th>Status</th><th>Video URL</th><th>Session ID</th><th>Public Session URL</th></thead>'
+					       + '<table style="width:100%"><thead><th style="height:50px">Name</th><th>Duration (s)</th><th>Browser</th><th>Browser Version</th>'
+					       + '<th>OS</th><th>OS Version</th><th>Device</th><th>Status</th><th>Video URL</th><th>Session ID</th><th>Public Session URL</th></thead>'
 					       + '<tbody>';
 				for(const index in body){
 					html_details+='<tr>'
 					       + '<td>'+body[index].automation_session.name+'</td>'
 					       + '<td>'+body[index].automation_session.duration+'</td>'
-					       + '<td>'+body[index].automation_session.os+'</td>'
-					       + '<td>'+body[index].automation_session.os_version+'</td>'
 					       + '<td>'+body[index].automation_session.browser+'</td>'
 					       + '<td>'+body[index].automation_session.browser_version+'</td>'
-					       + '<td>'+body[index].automation_session.status+'</td>'
-					       + '<td><a href="'+body[index].automation_session.video_url+'">Video URL</a></td>'
+					       + '<td>'+body[index].automation_session.os+'</td>'
+					       + '<td>'+body[index].automation_session.os_version+'</td>'
+					       + '<td>'+body[index].automation_session.device+'</td>';
+
+					  if(body[index].automation_session.status == 'failed')
+					  	html_details+='<td style="color:red">'+body[index].automation_session.status+'</td>'
+					  else if(body[index].automation_session.status == 'timeout')
+					  	html_details+='<td style="color:#f4b942">'+body[index].automation_session.status+'</td>'
+					  else if(body[index].automation_session.status == 'passed')
+					  	html_details+='<td style="color:green">'+body[index].automation_session.status+'</td>'
+					  else
+					  	html_details+='<td style="color:black">'+body[index].automation_session.status+'</td>'
+
+					  html_details+='<td><a href="'+body[index].automation_session.video_url+'">Video URL</a></td>'
 					       + '<td>'+body[index].automation_session.hashed_id+'</td>'
 					       + '<td><a href="'+body[index].automation_session.public_url+'">Public Session URL</a></td>'
 					       + '</tr>';
